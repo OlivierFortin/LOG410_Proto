@@ -18,6 +18,40 @@
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
+
+
+        <script type="text/javascript">
+
+        function display_c(start){
+            window.start = parseFloat(start);
+            var refresh=1000;
+            mytime=setTimeout('display_ct()',refresh)
+        }
+
+        function display_ct() {
+            // Calculate the number of days left
+            var days=Math.floor(window.start / 86400);
+            // After deducting the days calculate the number of hours left
+            var hours = Math.floor((window.start + (days * 86400 ))/3600)
+            // After days and hours , how many minutes are left
+            var minutes = Math.floor((window.start + (days * 86400 ) + (hours *3600 ))/60)
+            // Finally how many seconds left after removing days, hours and minutes.
+            var secs = Math.floor((window.start + (days * 86400 ) + (hours *3600 ) + (minutes*60)))
+
+            var x =  hours + " Hours " + minutes + " Minutes and " + secs%60 + " Secondes ";
+
+            $("#time").text(x);
+            window.start= window.start+ 1;
+
+            tt=display_c(window.start);
+        }
+
+        function stop() {
+            clearTimeout(mytime);
+        }
+
+        display_c(0);
+        </script>
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -26,14 +60,62 @@
 
 
         <div id="rigth-panel" class="col-md-8 fill">
-            iofdsihfasijkdfdsa
+
+
         </div>
         <div id="left-panel" class="col-md-4">
-            <div class="half">top</div>
-            <div class="half"> bottom</div>
+            <div class="half">
+                <span id="liveData">It's Live</span><br />
+                Rocket Start : <span id="time">0</span>
+                <form action="#" class="form-horizontal">
+                    <div class="form-group">
+
+                    </div>
+                    <div id="Elements" class="form-group">
+                        <label class="col-sm-4 control-label">Alt. Max</label>
+                        <input class="col-sm-2 half-width" placeholder="2500 ft">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Altitude</label>
+                        <input class="col-sm-2 half-width" placeholder="2500 ft">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Rocket speed</label>
+                        <input class="col-sm-2 half-width" placeholder="885 mph">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Temperature</label>
+                        <input class="col-sm-2 half-width" placeholder="92 fahrenheit">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Speed X</label>
+                        <input class="col-sm-2 half-width" placeholder="20 MPH">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Speed Y</label>
+                        <input class="col-sm-2 half-width" placeholder="800 MPH">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Speed z</label>
+                        <input class="col-sm-2 half-width" placeholder="50 MPH">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Pression</label>
+                        <input class="col-sm-2 half-width" placeholder="12 bare">
+                    </div>
+                </form>
+            </div>
+            <div id="model_rocket" class="half">
+                <div id="highcharts"></div>
+            </div>
         </div>
 
+        <div class="bottom">
+            <!-- Drog open : 10.2s from launch at 10 000 feets <br />
+            Main open : 22.2s from launch at 2 000 feets <br /> -->
+            Import Data<input type="file" class="btn" value="Import data"><br />
 
+        </div>
 
 
         <!-- build:js scripts/vendor.js -->
@@ -55,6 +137,7 @@
         <script src="bower_components/bootstrap/js/scrollspy.js"></script>
         <script src="bower_components/bootstrap/js/collapse.js"></script>
         <script src="bower_components/bootstrap/js/tab.js"></script>
+        <script src="bower_components/highcharts/highcharts.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->

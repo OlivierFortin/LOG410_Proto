@@ -10,6 +10,11 @@ html,body{height:100%;}
     background-image: url('../images/green_river.png');
 }
 
+#model_rocket {
+       background-position:center;
+    background-image: url('../images/rockets.jpg');
+}
+
 #left-panel{
     height: 100%;
 }
@@ -25,4 +30,15 @@ html,body{height:100%;}
 .half {
     height: 50%;
     min-height:50%;
+    overflow: scroll;
 }
+
+#liveData {
+    color:#00FF00;
+}
+
+.half-width {
+    width: 50%;
+}
+
+
